@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Net;
 using DocumentFormat.OpenXml.Packaging;
 using Laba_3.Utils;
+using System.Text;
+using System.Text.Json;
 
 namespace UnitTestLaba3
 {
@@ -39,6 +41,7 @@ namespace UnitTestLaba3
                 ControllerContext = new ControllerContext()
                 {
                     HttpContext = httpContext,
+
                 }
             };
         }
@@ -134,6 +137,42 @@ namespace UnitTestLaba3
         public void EncryptTest()
         {
             Assert.AreEqual(VigenerСipher.GetDataCipher(false, "тест", "скорпион"), "дпаг");
+        }
+
+        [TestMethod]
+        public void APiTest()
+        {
+            DataJson dataJson = new DataJson();
+            dataJson.Key = "скорпион";
+            dataJson.FlagAction = false;
+            dataJson.DataText = "тест";
+            dataJson.DataFile = "";
+
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["X-Custom-Header"] = "88-test-tcb";
+            httpContext.Request.Method = "POST";
+            httpContext.Request.ContentType = "application/json";
+            using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(dataJson))))
+            {
+                controller.ControllerContext.HttpContext.Request.Body = memoryStream;
+                controller.ControllerContext.HttpContext.Request.ContentLength = memoryStream.Length;
+            }
+
+            var mock = new Mock<ILogger<HomeController>>();
+            ILogger<HomeController> logger = mock.Object;
+
+            logger = Mock.Of<ILogger<HomeController>>();
+
+            controller = new HomeController(logger)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext,
+                }
+            };
+
+            JsonResult result = controller.HandlerData() as JsonResult;
+            Assert.IsNotNull(result);
         }
     }
 }

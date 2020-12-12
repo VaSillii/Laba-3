@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace Laba_3.Utils
 {
-    public class MyClass
+    public class DataJson
     {
         public string Key { get; set; }
         public bool FlagAction { get; set; }
         public string DataText { get; set; }
+        public string DataFile { get; set; }
     }
 }
