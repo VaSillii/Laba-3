@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Главная";
+    Dictionary<string, string> errors = (Dictionary<string, string>)(ViewData["Errors"]);
+}
+
+<div class="text-center">
+    <h1 class="display-4">Добро пожаловать!</h1>
+    <p>Здесь вы можете расшифровать или зашифровать текст.</p>
+    @ViewBag.i
+</div>
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h2 class="text-center">Иходные данные: </h2>
+        <form method="post" enctype="multipart/form-data" action="/" id="form">
+            <div class="form-group">
+                <label for="select-value">Выберите действия с данными:</label>
+                <select class="form-control" id="select-value" name="flag-action">
+                    <option value="true">Расшифровать</option>
+                    <option value="false">Зашифровать</option>
+                </select>
+            </div>
+            <p>Введите данные в форму и/или добавьте файл для обработки:</p>
+            <div class="form-group row">
+                <label for="key" class="col-sm-2 col-form-label">Введите ключ:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="key" name="key">
+                    <small class="form-text text-muted">
+                        Введите ключ используя кириллицу, если ключ не введен будет использован ключ по умолчанию.
+                    </small>
+                    <div class="invalid-feedback">
+                        Данные некорректны, введите снова!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputText" class="col-sm-2 col-form-label">Введите текст:</label>
+                <div class="col-sm-10">
+                    @if (errors != null && errors.ContainsKey("flagDataText"))
+                    {
+                        <textarea class="form-control is-invalid" rows="5" id="inputText" name="data-text"></textarea>
+                    }
+                    else 
+                    { 
+                        <textarea class="form-control" rows="5" id="inputText" name="data-text"></textarea>
+                    }
+                    <div class="invalid-feedback">
+                            Строка не может быть пустой
+                        </div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label for="data-file">Добавьте файл для обработки:</label>
+
+                @if (errors != null && errors.ContainsKey("flagDataFile"))
+                {
+                    <input type="file" class="form-control form-control-file is-invalid" name="uploadedFile" id="data-file">
+
+                }
+                else
+                {
+                    <input type="file" class="form-control form-control-file" name="uploadedFile" id="data-file">
+                }
+                <div class="invalid-feedback">
+                    Файл недопустимого размера или типа
+                </div>
+                <div id="e-fileinfo"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 text-center">
+                    <button class="btn btn-primary" id="btn_form">Отправить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h2 class="text-center">Результат</h2>
+        <div class="row">
+            <h5 class="col-4">Статус:</h5>
+            <div class="col-8">@ViewData["Status"]</div>
+        </div>
+
+
+        @if (errors != null)
+        {
+            <h5>Ошибки:</h5>
+
+            @foreach (var item in errors.Keys)
+            {
+                <p>@errors[item]</p>
+            }
+        }
+        else
+        {
+            <div class="row">
+                <h5 class="col-4">Ключ:</h5>
+                <div class="col-8">@ViewData["Key"]</div>
+            </div>
+
+            @if (ViewData["DataText"] != null)
+            {
+
+                <h5>Введенные данные:</h5>
+                <textarea class="form-control mb-4" rows="5" name="data_textarea" readonly>@ViewData["InitialDataText"]</textarea>
+                <h5>Данные после обработки:</h5>
+                <form method="post" action="/download-file">
+                    <textarea class="form-control mb-4" rows="5" name="data" readonly>@ViewData["DataText"]</textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Скачать</button>
+                </form>
+            }
+
+            @if (ViewData["DataFile"] != null)
+            {
+                <h5>Данные файла:</h5>
+                <textarea class="form-control mb-4" rows="5" readonly>@ViewData["InitialDataFile"]</textarea>
+
+                <h5>После обработки:</h5>
+                <form method="post" action="/download-file">
+                    <textarea class="form-control mb-4" rows="5" name="data" readonly>@ViewData["DataFile"]</textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Скачать</button>
+                </form>
+            }
+        }
+    </div>
+</div>

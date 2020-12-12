@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AppLaba3</string>
+    <string name="action_settings">Settings</string>
+    <string name="key">Ключ</string>
+    <string name="decrypt">Расшифровать</string>
+    <string name="encrypt">Зашифровать</string>
+	<string name="base_phrase">Исходная фраза</string>
+	<string name="key_input">Введите ключ</string>
+	<string name="phrase_input">Введите фразу</string>
+	<string name="enter_data">Введенные данные</string>
+	<string name="enter_data_before">Введенные данные до</string>
+	<string name="enter_data_after">Введенные данные после</string>
+	<string name="save_data">Сохранить</string>
+	<string name="enter_file">Выберите файл</string>
+	<string name="file_data_before">Данные файла до</string>
+	<string name="file_data_after">Данные файла после</string>
+	<string name="file_name">Имя выбраннного файла</string>
+	<string name="back">Назад</string>
+</resources>

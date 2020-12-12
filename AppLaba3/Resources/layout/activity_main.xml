@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout1"
+        >
+        <TextView
+            android:text="@string/key"
+            android:inputType="text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4" />
+        <EditText
+            android:id="@+id/edittextKey"
+            android:layout_width="match_parent"
+            android:imeOptions="actionGo"
+            android:inputType="text"
+            android:layout_height="wrap_content"
+            android:hint="@string/key_input" />
+        <TextView
+            android:text="@string/base_phrase"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/editTextData"
+            android:layout_width="match_parent"
+            android:imeOptions="actionGo"
+            android:inputType="text"
+            android:layout_height="wrap_content"
+            android:hint="@string/phrase_input" />
+        <TextView
+            android:text="@string/enter_file"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:inputType="text" />
+        <TextView
+            android:text="@string/file_name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:inputType="text" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/selectFile"
+            android:hint=""
+            android:inputType="text" />
+        <Button
+            android:text="@string/enter_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSelectFile"/>
+        
+        
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:id="@+id/linearLayout2"
+            android:gravity="center">
+            <Button
+                android:text="@string/encrypt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/btnEncrypt"
+                android:layout_marginRight="10px"/>
+            <Button
+                android:text="@string/decrypt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10px"
+                android:id="@+id/btnDecrypt" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
